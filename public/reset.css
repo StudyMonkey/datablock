@@ -8,6 +8,9 @@ html,body{
 body{
     padding: 0 20px 0 12px;
 } 
+ul,li{
+    list-style: none;
+}
 .fl{float: left;}
 .fr{float: right} 
 .clearfix{zoom: 1;}

@@ -12,7 +12,11 @@
           <table class="limitadm_table1">
             <tbody>
                 <tr class="h52 tr1">                  
-                  <td v-for="t in thead" :key="t">
+                  <td 
+                    v-for="(t,v) in thead" 
+                    :key="t"
+                    :class="{'iconfont iconjiansuo' : v === 3}"
+                  >
                   {{t}} 
                   </td>
                 </tr>

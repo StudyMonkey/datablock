@@ -27,15 +27,21 @@
             <div style="width:54px;margin: 40px auto">
                 <button class="limitadm_btn1" @click="incHandleSubmit">提交</button>
             </div>
-        </div> 
+        </div>
+        <v-pagination :total="total" :current-page='current' @pagechange="pagechange"></v-pagination> 
     </div>       
 </template>
 
 <script>
+import pagination from '@/components/pagination'
+
 export default {
     name: 'Increase',
     data () {
         return {
+            total: 150,     // 记录总条数
+            display: 10,   // 每页显示条数
+            current: 1,   // 当前的页数            
             inc_title: '', // 设计名称
             inc_description: '', // 设计描述
             inc_studyGroup: '', // 学习小组
@@ -69,12 +75,20 @@ export default {
             ]
         }
     },
+    components: {
+        'v-pagination': pagination
+    },
     methods: {
         incHandleSubmit(){
             const TITLE = this.inc_title;
             const DESCRIPTION = this.inc_description;
             const GROUPNO = this.inc_studyGroup;
-        }
+        },
+        pagechange(currentPage){
+        console.log(currentPage);
+        // ajax请求, 向后台发送 currentPage, 来获取对应的数据
+
+        }        
     }
 }
 </script>

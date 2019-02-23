@@ -20,7 +20,6 @@ export default {
   },
   watch: {
     $route(route){
-      console.log('watch', route);
       switch (route.name) {
         case 'home':
           return this.showTitle = ''
@@ -28,6 +27,8 @@ export default {
           return this.showTitle = '——新增/修改'
         case 'check':
           return this.showTitle = '——查看'
+        case 'history':
+          return this.showTitle = '——学习小组季度选课详情'
         default: 
           break;
       }
