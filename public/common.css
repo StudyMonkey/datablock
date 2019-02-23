@@ -1,0 +1,87 @@
+#lm_data-app .title h2{
+    font-size: 18px;
+    color: #000;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    font-weight: normal;
+    height: 43px;
+    line-height: 43px;
+    margin: 0 0 27px;
+}
+
+.content h2{
+    font-size: 24px;
+    font-weight: 100
+}
+
+.input_button_wrap{
+    margin-top: 20px;
+} 
+
+.limitadm_ipt1 {
+    height: 25px;
+    line-height: 25px;
+    border: 1px solid #c5c3c3;
+    border-radius: 4px;
+    padding: 0 4px;
+    width: 111px;
+    color: #333333;
+    font-size: 14px;
+}
+.w170{width: 170px}
+.w310{width: 300px}
+.w690{width: 680px}
+.h52{height: 52px}
+
+.limitadm_btn1 {
+    background: url(./toolbg.gif) repeat-x;
+    line-height: 27px;
+    height: 27px;
+    border: solid 1px #d3dbde;
+    padding: 0 10px;
+    margin-left: 5px;
+    border-radius: 3px;
+    color: #333333;
+    cursor: pointer;
+}
+
+.limitadm_table1 {
+    table-layout: fixed;
+    width: 100%;
+    text-align: center;
+    border: 1px solid #A3C0E8;
+}
+
+.limitadm_table1 tr.hover, .limitadm_table1 tr:hover {
+    background: #e0ecff;
+}
+
+.limitadm_table1 tr:nth-child(odd) {
+    background: #f5f5f5;
+}
+
+.limitadm_table1 tr.tr1 {
+    background-color: rgb(240,245,247);
+}
+
+.table_area{
+    margin-top: 30px;
+}
+
+.limitadm_table1 tr.tr1 td{
+    font-size: 18px
+}
+
+.limitadm_table1 td {
+    text-align: center;
+    border-right: dotted 1px #c7c7c7;
+    line-height: 20px;
+    padding: 6px 5px;
+    font-size: 14px;
+    word-break: break-all;
+}
+
+.wordInput_wrap{
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
