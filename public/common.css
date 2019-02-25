@@ -27,6 +27,7 @@
     color: #333333;
     font-size: 14px;
 }
+.w130{width: 130px}
 .w170{width: 170px}
 .w310{width: 300px}
 .w690{width: 680px}
@@ -89,9 +90,19 @@
     color: #f2c08c
 }
 
-
 .wordInput_wrap{
     margin-bottom: 20px;
     font-size: 14px;
+}
+
+input[type="checkbox"],
+input[type="radio"]{
+    vertical-align: middle
+}
+input[type="checkbox"]{
+    margin-right: 6px
+}
+input[type="radio"]{
+    margin-right: 4px
 }
 
