@@ -210,7 +210,7 @@ export default {
             conditionThree.UI_COMPONENT = 'DateRangePicker';
             conditionThree.VALUE = {}
             if ( this.inc_radioNum === 1 ) { // 周期性选择的两种不同情况
-                if ( this.inc_selectTimeRange === '请选择' ) {
+                if ( this.inc_selectTimeRange === '请选择' || this.inc_selectTimeRange === '0' ) {
                     this.$message.error('请选择一个周期性时间');  
                     this.spinShow = false;
                     this.btnShow = false;

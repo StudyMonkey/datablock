@@ -10,6 +10,7 @@
           <a-button @click="handleSearch" style="margin-left: 9px">搜索</a-button>
           <!-- <button class="limitadm_btn1" @click="handleSearch">搜索</button> -->
         </div> 
+        <a-button class="fr" @click="init" title="刷新页面数据">刷新</a-button>
         <a-button class="fr" @click="handleRouter('increase', null)" title="新增自定义数据模板" v-if="permissions_edit">新增</a-button>
       </div>
       <div class="table_area">
@@ -96,20 +97,23 @@ export default {
   components: {
     Loading
   },
-  async created() {
-    try {  
-      const res = await this.$http.get(this.httpUrl+'/reportDesignList/?token='+this.token+'&index=1&size=10&template_id='+this.template_id+'&keyword='+ this.searchWord );
-      const resData = res.data.data
-      this.permissions_edit = resData.permissions_edit;
-      resData.list.map( v => v.permission = resData.permissions_edit);
-      this.total = resData.total;
-      this.list = resData.list;
-      this.spinShow = false;
-    } catch (error) {
-      console.log(error);
-    }
+  created() {
+    this.init()
   },
   methods: {
+    async init(){
+      try {  
+        const res = await this.$http.get(this.httpUrl+'/reportDesignList/?token='+this.token+'&index=1&size=10&template_id='+this.template_id+'&keyword='+ this.searchWord );
+        const resData = res.data.data
+        this.permissions_edit = resData.permissions_edit;
+        resData.list.map( v => v.permission = resData.permissions_edit);
+        this.total = resData.total;
+        this.list = resData.list;
+        this.spinShow = false;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     // 搜索事件
     async handleSearch(){
       if ( this.searchWord !== '' ) {
