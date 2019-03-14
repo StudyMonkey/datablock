@@ -18,6 +18,26 @@ export default {
       showTitle: ''
     }
   },
+  async created () {
+    const token = this.getCookie('loginToken');
+    const inputVal = document.getElementById('model_key').value;
+    const { data: { data: { template_id } } } = await this.$http.get(this.httpUrl+'/GetTemplateId/?template_tag='+ inputVal +'&token='+token);
+    this.$root.token = token;
+    this.$root.template_id = template_id;
+    console.log(111);    
+    this.$router.push('/main')
+  }, 
+  methods: {
+    getCookie(name){ //获取指定名称的cookie值
+      // (^| )name=([^;]*)(;|$),match[0]为与整个正则表达式匹配的字符串，match[i]为正则表达式捕获数组相匹配的数组；
+      var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
+      if(arr != null) {
+        console.log(arr);
+        return unescape(arr[2]);
+      }
+      return null;
+    }          
+  },  
   watch: {
     $route(route){
       switch (route.name) {
@@ -33,19 +53,6 @@ export default {
           break;
       }
     }
-  },
-  created () {
-    
-  },
-  activated() {
-
-  },
-  components: {
-
   }
 }
 </script>
-
-<style>
-
-</style>

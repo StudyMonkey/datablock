@@ -5,9 +5,7 @@ html,body,div,p,h2,h3,input{
 html,body{
     font-family: "微软雅黑";
 }
-body{
-    padding: 0 20px 0 12px;
-} 
+
 ul,li{
     list-style: none;
 }

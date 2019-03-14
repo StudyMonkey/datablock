@@ -10,7 +10,7 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   routes: [
-    {path: '/', redirect: '/main'},
+    // {path: '/', redirect: '/main'},
     {
       path: '/main',
       name: 'home',
@@ -20,9 +20,6 @@ const router = new Router({
       path: '/increase',
       name: 'increase',
       component: Increase,
-      meta: {
-        auth: true
-      }
     }, 
     {
       path: '/check',

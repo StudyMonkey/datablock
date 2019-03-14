@@ -2,10 +2,10 @@ module.exports = {
   presets: [
     '@vue/app'
   ],
-/*   plugins: [
+  /*plugins: [
       [
         "import",
-        { libraryName: "ant-design-vue", libraryDirectory: "es", style: true }
+        { libraryName: "ant-design-vue", libraryDirectory: "es", style: 'css' }
       ]
-  ]  */ 
+  ]*/
 }

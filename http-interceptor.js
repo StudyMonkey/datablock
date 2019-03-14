@@ -1,17 +1,22 @@
 import axios from 'axios'
+import { message } from 'ant-design-vue'
 
-axios.interceptor.response.use(
+axios.interceptors.response.use(
     response => {
         if (response.status === 200) {
-        const data = response.data
-            if (data.code === -1) {
-                clearHanlder()
+            console.log( response );
+            if ( !response.data.data ) {
+                message.error( response.data.errorInfo )
             }
+            // console.log('请求成功');
         }
         return response
     }, err => {
         if( err.response.status === 401 ) {
-           clearHanlder()
+            message.error('请求错误'); 
+        }
+        if( err.response.status === 500 ) {
+            message.error('后台出错');            
         }
     }
 )
