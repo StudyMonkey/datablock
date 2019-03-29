@@ -23,7 +23,7 @@
                         @change="handleTreeChange(con,i)"
                     >    
                     </a-tree-select> 
-                    <a-checkbox v-if="con.UI_COMPONENT === 'DropList&CheckBox'" style="margin-left:9px" @change="handleCheckClick">包含下级</a-checkbox>  
+                    <a-checkbox v-if="con.UI_COMPONENT === 'DropList&CheckBox'" :defaultChecked="inc_checkDown" style="margin-left:9px" @change="handleCheckClick">包含下级</a-checkbox>  
                 </div>             
 
                 <div style="display: inline;margin-left: 8px;">
@@ -153,6 +153,11 @@ export default {
                     this.endTime = moment(this.resData.CONDITION.filter( v => v.FIELD === 'ADD_TIME' )[0].VALUE.END, this.dateFormat)
                 }                
                 this.condition = this.resData.CONDITION.filter(V => V.UI_COMPONENT !== 'DateRangePicker');
+                this.condition.map( v => {
+                    if ( v.UI_COMPONENT === 'DropList&CheckBox' ) {
+                        this.inc_checkDown = v.IS_CONTAIN
+                    }
+                })
                 this.fields = this.resData.FIELDS; // 表格数据
 
             } else {// 点击新增按钮调用接口
@@ -162,7 +167,6 @@ export default {
                     v.VALUE = undefined;
                 })
                 this.condition = this.resData.CONDITION.filter(V => V.UI_COMPONENT !== 'DateRangePicker');
-                console.log(this.condition);
                 this.fields = this.resData.FIELDS; // 表格数据
                         
                 this.fields.map( v => v.checked = true);                
@@ -250,6 +254,7 @@ export default {
             const res = await this.$http.post(this.httpUrl+'/createReportTask/', this.resData)
             if ( res.data.resultState === 'success' ) {
                 this.$message.success(res.data.data.info);
+                this.$message.info('请耐心等待1-5分钟，点击刷新即可查看最新数据', 10);
                 this.$router.push('/main');
             }else {
                 this.$message.success(res.data.errorInfo);

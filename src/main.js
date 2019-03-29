@@ -6,6 +6,7 @@ import './assets/font/iconfont.css'
 import { DatePicker,Select,TreeSelect,Checkbox,Radio,Input,Button,Pagination,Modal,Tooltip,message,Tag } from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css'
 import '../http-interceptor'
+import 'babel-polyfill'
 
 /*Vue.component(Button.name, Button);
 Vue.component(DatePicker.name, DatePicker);
@@ -40,7 +41,7 @@ Vue.prototype.$confirm = Modal.confirm
 // 火狐测试token
 // Vue.prototype.token = 'eyJlaWQiOiAia3N6IiwgImNyZWF0ZV90aW1lIjogIjIwMTktMDMtMDcgMTQ6Mjc6MzgiLCAidXNlcl9hZ2VudCI6ICJNb3ppbGxhLzUuMCAoV2luZG93cyBOVCA2LjE7IFdpbjY0OyB4NjQ7IHJ2OjYxLjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvNjEuMCJ9';
 // Vue.prototype.template_id = '5b9b0343d84efb159863fc5a'
-Vue.prototype.httpUrl = 'http://27.132.119.247:9010/reportserver/v2'
+Vue.prototype.httpUrl = 'http://10.128.18.98:9011/reportserver/v2'
 
 new Vue({
   router,

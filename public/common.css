@@ -31,11 +31,16 @@
     color: #333333;
     font-size: 14px;
 }
+.w80{ width: 80px }
 .w130{width: 130px}
+.w160{width: 160px}
 .w170{width: 170px}
+.w200{width: 200px}
 .w310{width: 300px}
 .w690{width: 680px}
 .h52{height: 52px}
+.ml8{margin-left: 8px}
+.ml20{margin-left: 20px}
 
 .limitadm_btn1 {
     background: url(./toolbg.gif) repeat-x;
@@ -123,6 +128,9 @@ input[type="radio"]{
 .ant-spin-spinning .anticon{
     margin-top: 40%
 }
+.ant-modal-close-icon{
+    margin-top: 15px;
+}
 
 .ajax-loading .loading{
     position: fixed;
@@ -136,7 +144,7 @@ input[type="radio"]{
     border-radius: 6px;
     text-align: center;
     z-index: 9999;
-    font-size:@fontD;
+    font-size: 14px;
     color:#fff;    
 }
 

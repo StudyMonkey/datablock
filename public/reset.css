@@ -4,6 +4,7 @@ html,body,div,p,h2,h3,input{
 }  
 html,body{
     font-family: "微软雅黑";
+    color: #333333 !important;
 }
 
 ul,li{
@@ -18,3 +19,5 @@ ul,li{
     visibility: hidden;
     display: block;
 } 
+
+.ant-pagination-item-link .anticon{margin-top: 9px}

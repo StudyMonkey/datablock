@@ -6,18 +6,16 @@
       <div class="clearfix input_button_wrap">
         <div class="fl">
           <a-input placeholder="请输入" style="width: 310px" v-model="searchWord" />
-          <!-- <input type="text" class="limitadm_ipt1 w310" > -->
           <a-button @click="handleSearch" style="margin-left: 9px">搜索</a-button>
-          <!-- <button class="limitadm_btn1" @click="handleSearch">搜索</button> -->
         </div> 
-        <a-button class="fr" @click="init" title="刷新页面数据">刷新</a-button>
+        <a-button class="fr ml8" @click="init" title="刷新页面数据">刷新</a-button>
         <a-button class="fr" @click="handleRouter('increase', null)" title="新增自定义数据模板" v-if="permissions_edit">新增</a-button>
       </div>
       <div class="table_area">
         <table class="limitadm_table1">
           <tbody>
             <tr class="h52 tr1">
-              <td v-for="t in thead" :key="t">
+              <td v-for="t in thead" :key="t" :class="[ t === '创建者' ? 'w200' : '' ]">
                 {{t}} 
               </td>
             </tr>
@@ -27,6 +25,7 @@
               <td>{{i.CREATE_TIME}}</td>
               <td>{{i.EDITOR}}</td>
               <td>
+                <span v-if="i.STATUS === '失败'"  @click="handleRetry(i.ID)"  title="重新运行" class="iconfont iconzhongzhi"></span>
                 <span 
                   @click="handleRouter('check', i.TASK_ID)" 
                   title="查看最新数据" 
@@ -37,7 +36,7 @@
                 <span 
                   class="iconfont iconxiugai" 
                   @click="handleRouter('increase', i.ID)"  
-                  title="编辑模板"
+                  title="编辑"
                   v-if="i.permission && i.DESIGN_TYPE !== '公共'"
                 ></span>
                 <span 
@@ -91,17 +90,18 @@ export default {
       token: this.$root.token,
       template_id: this.$root.template_id,
       permissions_edit: true,
-      ind: '' // 删除条目的下标
     }
   },
   components: {
     Loading
   },
-  created() {
-    this.init()
+  async created() {
+    this.init();  
   },
   methods: {
-    async init(){
+    async init () {
+      this.spinShow = true
+      this.current = 1
       try {  
         const res = await this.$http.get(this.httpUrl+'/reportDesignList/?token='+this.token+'&index=1&size=10&template_id='+this.template_id+'&keyword='+ this.searchWord );
         const resData = res.data.data
@@ -110,10 +110,16 @@ export default {
         this.total = resData.total;
         this.list = resData.list;
         this.spinShow = false;
+        this.list.map ( v => {
+          if ( v.STATUS === '失败' ){
+            this.$message.error('部分报表生成失败，请点击操作栏中的重新运行');
+            return
+          }
+        })          
       } catch (error) {
         console.log(error);
       }
-    },
+    },    
     // 搜索事件
     async handleSearch(){
       if ( this.searchWord !== '' ) {
@@ -135,6 +141,13 @@ export default {
         }
       });
     },
+    // 重新运行事件处理
+    async handleRetry(id){
+      const res = await this.$http.get(this.httpUrl + '/desginTryRun/?token='+this.token+'&design_id='+id);     
+      if ( res.data.resultState === 'success' ) {
+        this.$message.success(res.data.data.info, 10);
+      }     
+    },   
     handleDelete(index){
       this.$confirm({
         title: '确认删除此条数据么',

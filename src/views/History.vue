@@ -6,11 +6,14 @@
       <table class="limitadm_table1">
         <tbody>
           <tr class="h52 tr1">
-            <td v-for="t in thead" :key="t">
-              {{t}} 
-            </td>
+            <td class="w160">报表修改时间</td>
+            <td>名称</td>
+            <td class="w310">时间段</td>
+            <td class="w200">下载次数</td>
+            <td>操作</td>
           </tr>
           <tr v-for="i in list" :key="i.id">
+            <td>{{i.DESIGN_CREATE_TIME}}</td>
             <td>{{i.TITLE}}</td>
             <td>{{i.DATA_START_TIME}}至{{i.DATA_END_TIME}}</td>
             <td>{{i.COUNT}}</td>
@@ -33,7 +36,6 @@ export default {
   data() {
     return {
       spinShow: true,
-      thead: ['名称', '时间段', '下载次数', '操作'],
       list: [],
       design_id: '',
       token: this.$root.token,
@@ -68,6 +70,11 @@ export default {
   },
   async created(){
     this.design_id = this.$route.params.task_id;
+    if ( this.design_id ){
+      localStorage.setItem('design_id', JSON.stringify(this.design_id))
+    } else {
+      this.design_id = JSON.parse(localStorage.getItem('design_id'))
+    }    
     const res = await this.$http.get(this.httpUrl+'/reportTaskList/?token='+ this.token +'&design_id='+ this.design_id + '&index=1&size=10' );
     this.list = res.data.data.list;
     this.spinShow = false

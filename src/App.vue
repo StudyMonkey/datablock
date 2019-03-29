@@ -2,7 +2,7 @@
   <div id="lm_data-app">
     <div class="title">
       <h2>
-        <span id="messageManager">学习小组报表模板 —— <router-link to="/main">学习小组选课详情</router-link><span>{{showTitle}}</span></span>
+        <span id="messageManager">学习小组报表 —— <router-link to="/main">学习小组选课详情</router-link><span>{{showTitle}}</span></span>
       </h2>
     </div> 
     <router-view></router-view>   
@@ -20,10 +20,15 @@ export default {
   },
   async created () {
     const token = this.getCookie('loginToken');
+    console.log(token);
+    if ( token === '' || token === null ){
+      this.$message.error('发生错误，请返回重新登录')
+      return false
+    }
     const inputVal = document.getElementById('model_key').value;
-    const { data: { data: { template_id } } } = await this.$http.get(this.httpUrl+'/GetTemplateId/?template_tag='+ inputVal +'&token='+token);
+    const res = await this.$http.get(this.httpUrl+'/GetTemplateId/?template_tag='+ inputVal +'&token='+token);
     this.$root.token = token;
-    this.$root.template_id = template_id;
+    this.$root.template_id = res.data.data.template_id;
     console.log(111);    
     this.$router.push('/main')
   }, 

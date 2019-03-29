@@ -11,12 +11,12 @@
         <a-input placeholder="请输入" style="width: 310px" v-model="searchName" />
         <a-button @click="handleNameSearch" style="margin-left: 9px">搜索</a-button>
       </a-modal>
-        <div class="wordInput_wrap clearfix"><span class="fl">设计名称：</span><p class="fl">{{degisn_title}}</p></div>
-        <div class="wordInput_wrap clearfix"><span class="fl">设计描述：</span><p class="fl">{{design_description}}</p></div>
+        <div class="wordInput_wrap clearfix"><span class="fl">名称：</span><p class="fl">{{degisn_title}}</p></div>
+        <div class="wordInput_wrap clearfix"><span class="fl">描述：</span><p class="fl">{{design_description}}</p></div>
         <div class="wordInput_wrap clearfix"><span class="fl">学习小组：</span>
           <p class="fl">{{study_group}}</p>
-          <p class="fl timeshow_word">开始时间：<span>{{start_time}}</span></p>
-          <p class="fl timeshow_word">结束时间：<span>{{end_time}}</span></p>
+          <p class="fl timeshow_word">查询时间：<span>{{start_time}}</span>至<span>{{end_time}}</span></p>
+          <a-button class="fl ml20" @click="handleDownload">下载</a-button>
         </div>
         <div class="table-area">
           您所选择的内容: 
@@ -28,6 +28,7 @@
                     v-for="(t,v) in thead" 
                     :key="t"
                     :class="{'iconfont iconjiansuo' : tsearch.indexOf(t) > -1 }"
+                    :title=" tsearch.indexOf(t) > -1 ? '筛选' : '' "
                     @click="handleModalShow(t)"
                   >
                   {{t}} 
@@ -99,6 +100,13 @@ export default {
     this.commonFunc(url);
   },
   methods: {
+    async handleDownload(){
+      this.spinShow = true
+      const res = await this.$http.get(this.httpUrl+'/reportDownLoad/?token='+ this.token +'&task_id='+ this.task_id);
+      const resData = res.data.data;
+      window.open(this.httpUrl + resData.FILE_URL);
+      this.spinShow = false
+    },
     async commonFunc(url){
       this.spinShow = true
       if ( typeof this.filters !== 'string' ) {
@@ -189,9 +197,14 @@ export default {
 .limitadm_table1 .tr1 td{
   font-size: 14px;
 }
-
+.iconjiansuo:before{
+  font-size: 22px;
+}
 .timeshow_word{
   margin-left: 90px
+}
+.ant-btn-default{
+  margin-top: -5px;
 }
 </style>
 
